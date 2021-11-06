@@ -16,6 +16,8 @@ this will make a virtual enviroment named **env**
 * Now to activate the env enviriment in the terminal.
 ```
 $ env\Script\activate
+$ pip install -r requirements.txt
+$ python main.py
 ```
 In the terminal **(env)** come before.
 * Install the **pip install -r requirements.txt** in the terminal to install all the requirements.
