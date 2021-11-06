@@ -18,6 +18,7 @@ this will make a virtual enviroment named **env**
 $ env\Script\activate
 ```
 In the terminal **(env)** come before.
-* Install the _pip install -r requirements.txt_ in the terminal to install all the requirements.
-* Now run the server _python main.py_
+* Install the **pip install -r requirements.txt** in the terminal to install all the requirements.
+* Run the server from **python main.py** command in the terminal.
+
 
