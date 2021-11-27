@@ -1,54 +1,14 @@
-from flask import Flask, render_template, request, session, redirect
-from flask_sqlalchemy import SQLAlchemy
+from flask import render_template, request, session, redirect
 from werkzeug.utils import secure_filename
-from flask_mail import Mail
 import json
 import os
 import math
 from datetime import datetime
-
+from quora.models import Posts, Contacts
+from quora import app
 
 with open('config.json', 'r') as c:
     params = json.load(c)["params"]
-
-local_server = True
-app = Flask(__name__)
-app.secret_key = 'super-secret-key'
-app.config['UPLOAD_FOLDER'] = params['upload_location']
-app.config.update(
-    MAIL_SERVER = 'smtp.gmail.com',
-    MAIL_PORT = '465',
-    MAIL_USE_SSL = True,
-    MAIL_USERNAME = params['gmail-user'],
-    MAIL_PASSWORD=  params['gmail-password']
-)
-mail = Mail(app)
-if(local_server):
-    #  mysql://username:password@server/db
-    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri']
-
-db = SQLAlchemy(app)
-
-
-class Contacts(db.Model):
-    sno = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
-    phone_num = db.Column(db.String(12), nullable=False)
-    msg = db.Column(db.String(120), nullable=False)
-    date = db.Column(db.String(12), nullable=True)
-    email = db.Column(db.String(20), nullable=False)
-
-
-class Posts(db.Model):
-    sno = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80), nullable=False)
-    slug = db.Column(db.String(21), nullable=False)
-    content = db.Column(db.String(120), nullable=False)
-    tagline = db.Column(db.String(120), nullable=False)
-    date = db.Column(db.String(12), nullable=True)
-    img_file = db.Column(db.String(12), nullable=True)
 
 
 @app.route("/")
@@ -179,6 +139,3 @@ def contact():
                           body = message + "\n" + phone
                           )
     return render_template('contact.html', params=params)
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8000)

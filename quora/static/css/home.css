@@ -1,0 +1,13 @@
+.title{
+    color: #44505273;
+    font-weight: 500;
+    padding: 1rem;
+    border-bottom: 1px solid #8080804d;
+    margin-bottom: 1rem;
+}
+
+.title-content{
+    padding: 1rem;
+    box-shadow:  1px 2px 8px #888888;
+}
+

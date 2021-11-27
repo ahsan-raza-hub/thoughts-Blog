@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block body %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <!-- Page Header -->
+    <header class="masthead p-5" style="background-image: url('static/img/home_bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Queries logo"/>
+              <span class="subheading">A beneficial Knowledge</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="mx-auto p-4">
+          
+        <h2 class="title border-bottom">
+          Recent Answers
+        </h2>
+
+        <div class="title-content">
+          {% for post in posts %}    
+               <div class="post-preview">
+                 <a href="/post/{{post.slug}}">
+                   <h3 class="post-title">{{ post.title }}
+     
+                   </h3>
+                   <h4 class="post-subtitle">
+                     {{post.tagline}}
+                   </h4>
+                 </a>
+                 <p class="post-meta">Posted by
+                   <a href="#">Admin</a>
+                   on {{post.date}}</p>
+               </div>
+     
+               {{post.content[0:143]}}...
+               <hr>
+     </li></a>
+               {% endfor %}
+               <!-- Pager -->
+               
+            </div>
+              
+              <div class="row justify-content-between p-3">
+              
+                
+                <a class="btn btn-primary col-md-3 mb-1" href="{{prev}}"> &larr;Previous</a>
+                <a class="btn btn-primary col-md-3" href="{{next}}">Next &rarr;</a>
+              </div>
+
+        </div>
+      </div>
+    </div>
+    {% endblock %}
